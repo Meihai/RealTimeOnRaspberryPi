@@ -13,6 +13,6 @@ sudo echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
 
 解决办法
 系统软件有bug，运行
-sudo apt-get –y –force --fix-missing  upgrade
+sudo apt-get –y –f --fix-missing  upgrade
 
 对系统软件进行重新更新就可解决问题
