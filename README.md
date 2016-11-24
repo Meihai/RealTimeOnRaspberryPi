@@ -122,7 +122,30 @@ I tried putting 'hwclock -s' in /etc/rc.local, but that runs way too late.）
  
 
   
-  
+  方案三
+1 编辑/boot/config.txt文件
+  sudo nano /boot/config.txt
+  to edit the pi configuration and add whichever matches your RTC chip:
+  dtoverlay=i2c-rtc,ds1307
+  or
+  dtoverlay=i2c-rtc,ds3231
+
+2 卸载fake hwclock
+Disable the "fake hwclock" which interferes with the 'real' hwclock
+sudo apt-get -y remove fake-hwclock
+sudo update-rc.d -f fake-hwclock remove
+
+3 Run sudo nano /lib/udev/hwclock-set and comment out these three lines:
+#if [ -e /run/systemd/system ] ; then
+# exit 0
+#fi
+参考文献
+https://learn.adafruit.com/adding-a-real-time-clock-to-raspberry-pi?view=all
+硬件时钟修改指令：
+sudo hwclock --set  --date =”11/23/16 18:38:00”
+硬件时钟读取和系统时钟对比指令：
+sudo hwclock –r;date
+
   
   
   
